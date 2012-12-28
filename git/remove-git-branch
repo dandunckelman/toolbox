@@ -1,0 +1,26 @@
+#/bin/bash
+# the purpose of this script is to help remove git branches (specifically for use w/ sites)
+
+if [ -n "$1" ]
+then
+	# 1 is the path pointing to the branch desired to be removed
+
+	# go into branch's dir
+	cd ~/code/www/sites/$1
+	echo ":::: REMOVE-GIT-BRANCH :::: Entered branch's directory ($1)"
+
+	# remove branch from git
+	git push origin :$1
+	echo ":::: REMOVE-GIT-BRANCH :::: Removed branch from git"
+
+	# remove branch's dir from local
+	rm -rf ~/code/www/sites/$1
+	echo ":::: REMOVE-GIT-BRANCH :::: Deleted branch's local directory"
+
+        # return to script dir
+        cd ~/bin
+
+        echo ":::: REMOVE-GIT-BRANCH :::: Process completed successfully."
+else
+        echo ":::: REMOVE-GIT-BRANCH :::: You're missing the branch's path. Please try again. For example:  ./new-git-branch www.sitename.com"
+fi

@@ -1,0 +1,34 @@
+#/bin/bash
+
+if [ -n "$1" ]
+then
+	# create new site dir
+	mkdir ~/code/www/sites/$1
+	cd ~/code/www/sites/$1
+
+	# initialize git
+	git init
+	git remote add -t $1 -f origin git@github.com:onescreen/sites.git
+
+	# get this site's code
+	git checkout $1
+
+	# setup localhost
+	cd /var/www && ln -s ~/code/www/sites/$1/src/ $1
+
+	# nginx
+	cd /etc/nginx/sites-enabled/
+	sudo cp ../sites-available/master ../sites-available/$1
+	sudo ln -s ../sites-available/$1 100-$1
+	sudo sed "s/xxyydomain/$1/" ~/bin/template | sudo tee /etc/nginx/sites-available/$1
+
+	echo "127.0.0.1 os.$1" | sudo tee -a /etc/hosts
+
+	sudo mkdir /var/log/nginx/$1
+
+	sudo service php5-fpm reload
+	sudo service nginx reload
+else
+        echo ":::: GET-GIT-BRANCH :::: You're missing the required param:  branch name."
+        echo ":::: GET-GIT-BRANCH :::: Here's an example where a new directory is made:  get-git-branch sitename.com"
+fi

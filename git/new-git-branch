@@ -1,0 +1,56 @@
+#/bin/bash
+# the purpose of this script is to make a new git branch (in my usage, a branch for a new site)
+# go into site's parent dir
+cd ~/code/www/sites/
+
+if [ -n "$1" -a -n "$2" ]
+then
+	# if 3rd param is passed, do a copy instead of mkdir
+	if [ -n "$3" ]
+	then
+                echo ":::: NEW-GIT-BRANCH :::: Copying $3 to $2"
+                cp -v -R $3 $2
+                cd $2
+                echo ":::: NEW-GIT-BRANCH :::: Removing newly copied .git dir"
+                rm -rf .git/
+	else
+		echo ":::: NEW-GIT-BRANCH :::: Making new dir"
+		mkdir -v $2
+		cd $2
+	fi
+
+	# init this dir as a git dir
+	echo ":::: NEW-GIT-BRANCH :::: Git init"
+	git init
+
+	# make this local work with onescreen's sites repo
+	echo ":::: NEW-GIT-BRANCH :::: git remote add origin"
+	git remote add origin git@github.com:onescreen/sites.git
+
+	# add all new files to stage for commit
+	echo ":::: NEW-GIT-BRANCH :::: git add ."
+	git add .
+
+	# commit all changes
+	echo ":::: NEW-GIT-BRANCH :::: git commit -a -m 'New branch (site) created: $2. [#$1]'"
+	git commit -a -m "New branch (site) created: $2. [#$1]"
+
+	# rename branch from master to current site name
+	echo ":::: NEW-GIT-BRANCH :::: git branch -m master $2"
+        git branch -m master $2
+
+	# push changes up into new branch
+	echo ":::: NEW-GIT-BRANCH :::: git push origin $2"
+	git push origin $2
+
+	echo ":::: NEW-GIT-BRANCH :::: Process completed successfully."
+	echo ":::: NEW-GIT-BRANCH :::: Setting up local server for handling this new site (branch)."
+	cd /var/www && ln -s ~/code/www/sites/$2/src/ $2
+
+	echo "127.0.0.1 os.site.$2" | sudo tee -a /etc/hosts
+	echo ":::: NEW-GIT-BRANCH :::: You still need to add the nginx config file."
+else
+        echo ":::: NEW-GIT-BRANCH :::: You're missing the 2 required params:  pivotal tracker ticket number and the branch's name."
+        echo ":::: NEW-GIT-BRANCH :::: Here's an example where a new directory is made:  ./new-git-branch 20 sitename.com"
+	echo ":::: NEW-GIT-BRANCH :::: Here's an example where the new directory is a copy of another dir:  ./new-git-branch 20 sitename.com master.com"
+fi

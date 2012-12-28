@@ -6,7 +6,6 @@
 * Nginx
 * PHP
 * Ruby
-* RVM
 * Synergy
 * Vim
 * Xmonad
