@@ -53,10 +53,14 @@ sudo apt-get -y install fluxgui
 
 echo -e "\n$DL10"
 echo "$DL2       Install terminal utils        $DL2"
-sudo apt-get -y install libxslt-dev libxml2-dev build-essential gnome-session gnome-panel curl gnome-shell vim tree git meld s3cmd ghc6 xmonad nginx php5-fpm php5-cli php5-curl s3cmd samba automake subversion git-svn imagemagick clusterssh network-manager-vpnc xcompmgr
+sudo apt-get -y install libxslt-dev libxml2-dev build-essential gnome-session gnome-panel curl gnome-shell vim tree git gitk meld s3cmd ghc6 xmonad nginx php5-fpm php5-cli php5-curl s3cmd samba automake subversion git-svn imagemagick clusterssh network-manager-vpnc xcompmgr
 
 echo -e "\n$DL10"
-echo "$DL NOTE: for s3cmd, get a copy of .s3cfg from working machine"
+echo "$DL2       Install node.js       $DL2"
+sudo apt-get install -y python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get -y install nodejs npm
 
 echo -e "\n$DL10"
 echo "$DL NOTE: for xmonad, after install, get copy of config dir"
