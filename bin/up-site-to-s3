@@ -1,0 +1,1 @@
+s3cmd -c ~/.s3cfg-personal put --recursive --force ~/Work/personal/dandunckel.com/_site/* s3://dandunckel.com
