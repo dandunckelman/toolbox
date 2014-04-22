@@ -31,12 +31,11 @@ import Data.Ratio ((%))
 import Data.List
 import System.IO
 
-myWorkSpaces    = ["Web", "Terminal", "IDE", "IM", "Places", "FTP", "Chef"]
+myWorkSpaces    = ["Terminals", "Web", "Terminals2", "Chat", "Terminals3", "MySQL", "Terminals4", "FileBrowser", "Terminals5"]
 
 main = xmonad
     gnomeConfig {
           terminal          = "gnome-terminal"
-        , manageHook        = manageHook defaultConfig <+> myManageHook
         , layoutHook        = smartBorders (layoutHook gnomeConfig)
         , startupHook       = setDefaultCursor xC_pirate
         , focusFollowsMouse = False
@@ -48,27 +47,6 @@ main = xmonad
         , keys = \c -> myKeys c `M.union` keys defaultConfig c
     }
     where
-        myManageHook = composeAll . concat $
-            [ [manageDocks]
-            , [ (className  =? "." <&&> resource =? ".") --> doFloat ]
-            , [ (className  =? "Nautilus" <&&> resource =? "nautilus") --> doFloat ]
-            , [ (className  =? "Thunderbird-bin" <&&> resource =? "Password Required") --> doFloat ]
-            , [ (className  =? "Do" <&&> resource =? "Do") --> doFloat ]
-            , [ (className  =? "Npviewer.bin" <&&> resource =? "npviewer.bin") --> doFloat ]
-            , [ (className  =? "Nm-connection-editor" <&&> resource =? "nm-connection-editor") --> doFloat ]
-            , [ (className  =? "Totem-plugin-viefwer" <&&> resource =? "totem-plugin-viewer") --> doFloat ]
-            , [ (className  =? "File-roller" <&&> resource =? "file-roller") --> doFloat ]
-            , [ resource    =? r --> doIgnore              | r <- myIgnores]
-            , [ fmap ( c `isInfixOf`) className --> doFloat | c <- myMatchAnywhereFloatsC ]
-            , [ fmap ( c `isInfixOf`) title     --> doFloat | c <- myMatchAnywhereFloatsT ]
-            ]
-
-        -- apps
-        myIgnores     = ["Do"]
-
-        myMatchAnywhereFloatsC = []
-        myMatchAnywhereFloatsT = ["VLC"]
-
         -- key bindings
         myKeys (XConfig {modMask = modm}) = M.fromList $
             [ ((modm, xK_b), sendMessage ToggleStruts)

@@ -1,2 +1,0 @@
-#!/bin/bash
-ruby ~/bin/os-prod-ver.rb sites update $1

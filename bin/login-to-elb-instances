@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+require 'aws-sdk'
+
+AWS.config({:access_key_id => ENV['EC2_ACCESS_KEY_ID'],
+             :secret_access_key => ENV['EC2_SECRET_ACCESS_KEY']})
+
+SCRIPT = "login-to-elb-instances"
+USAGE = "USAGE: #{SCRIPT} ELB_NAME (e.g. #{SCRIPT} os-api-consumer)"
+
+def get_user_input
+  if ARGV.length != 1
+    STDERR.puts USAGE
+    exit
+  end
+  ARGV[0]
+end
+
+def get_lb_by_name(name)
+  AWS::ELB.new.load_balancers.each { |lb| return lb if lb.name == name }
+  STDERR.puts "Load Balancer not found: \"#{lb_name}\""
+  exit
+end
+
+def get_lb_hosts(lb)
+  hosts = []
+  lb.instances.each { |ins| hosts << ins.dns_name if ins.dns_name }
+  hosts
+end
+
+def hosts_list(hosts)
+  hosts.map {|h| "ubuntu@#{h}"}.join " "
+end
+
+lb_name = get_user_input
+lb = get_lb_by_name(lb_name)
+hosts = get_lb_hosts(lb)
+list = hosts_list(hosts)
+puts "Logging into #{hosts.count} instances..."
+%x(ssh-add ~/.ssh/os-m.pem; cssh #{list})

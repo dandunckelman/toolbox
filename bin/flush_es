@@ -1,0 +1,7 @@
+#!/bin/sh                                                                       
+                                                                                
+sudo service elasticsearch restart                                              
+sleep 10                                                                        
+curl -XDELETE 'http://localhost:9200/_all'                                      
+sleep 10                                                                        
+sudo service elasticsearch restart
