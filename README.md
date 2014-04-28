@@ -3,9 +3,7 @@
 * AWS
 * Bootstrapping
 * Git
-* Nginx
-* PHP
 * Ruby
-* Synergy
+* Scala
 * Vim
 * Xmonad
