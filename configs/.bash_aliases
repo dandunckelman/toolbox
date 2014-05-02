@@ -35,6 +35,10 @@ alias ifconfig='/sbin/ifconfig'
 alias mphone='sudo mtpfs -o allow_other /media/nexus4/'
 alias umphone='sudo umount /media/nexus4/'
 
+# shortcuts
+alias install-vi-plugins='vim +PluginInstall +qall'
+alias ssh-jenkins='ssh-add ~/.ssh/os-m.pem; ssh ubuntu@ec2-107-22-46-156.compute-1.amazonaws.com'
+
 # deployment shortcuts
 alias odsl='od; onescreen-deployer -p sites -e production -a list'
 alias odsc='od; onescreen-deployer -p sites -e production -a current'

@@ -51,6 +51,7 @@ set showmatch       " show matching brackets
 set matchtime=5     " bracket blinking? what is this?
 set showcmd         " show the current command in the status bar
 set autoread        " set to auto read when a file is changed from the outside
+set tabpagemax=100  " when opening multiple tabs, allow max number of tabs
 
 " mouse
 set mouse-=a        " disable mouse

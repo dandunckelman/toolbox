@@ -38,7 +38,8 @@
 - Install `silver searcher` to integrate better searching in Vim (https://github.com/ggreer/the_silver_searcher)
 
         sudo apt-get install silversearcher-ag
-  - This is then integrated into Vim w/ the `ack.vim` plugin listed below
+  - This is then integrated into Vim w/ the `ack.vim` plugin listed below.
+  - Note: this does not work on Ubuntu 12.04; it must be built from source (see link above for instructions).
 - Setup Vundle:  https://github.com/gmarik/Vundle.vim
   - Add these plugins:
     - https://github.com/derekwyatt/vim-scala
