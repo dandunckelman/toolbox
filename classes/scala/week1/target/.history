@@ -1,0 +1,14 @@
+run
+~run
+~test
+~run
+test
+run
+~test
+run
+~run
+~test
+~run
+val test = "(if (zero? x) max (/ 1 x))".toList
+val test_list = "(if (zero? x) max (/ 1 x))".toList
+console

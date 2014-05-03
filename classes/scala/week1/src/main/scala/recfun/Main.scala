@@ -9,28 +9,35 @@ object Main {
         print(pascal(col, row) + " ")
       println()
     }
+
+    val test_list1 = "".toList
+    val test_list2 = "(if (zero? x) max (/ 1 x))".toList
+    val test_list3 = "I told him (that it's not (yet) done). (But he wasn't listening)".toList
+    println(balance(test_list1))
+    println(balance(test_list2))
+    println(balance(test_list3))
   }
 
   /**
    * Exercise 1
-   * The numbers at the edge of the triangle are all 1,
-   * and each number inside the triangle is the sum of the two numbers above it
-   * pascal(0, 0) = 1
-   * pascal(0, 1) = 1
-   * pascal(1, 1) = 1
-   * pascal(4, 0) = 1
-   * pascal(1, 2) = 2
-   * pascal(1, 4) = 4
-   * pascal(2, 4) = 6
-   * pascal(3, 4) = 4
    */
-  def pascal(c: Int, r: Int): Int = 
-    
+  def pascal(c: Int, r: Int): Int = {
+    if (c <= 0 || c == r) 1 else pascal(c, r - 1) + pascal(c - 1, r - 1)
+  }
 
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def isBalanced(): Boolean = {
+      val parens = chars.filter(Set('(', ')'))
+      if (parens.isEmpty == true) true
+      else (false)
+    }
+
+    if (chars.isEmpty == true) true
+    else (isBalanced())
+  }
 
   /**
    * Exercise 3
