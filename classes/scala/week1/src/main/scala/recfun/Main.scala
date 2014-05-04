@@ -10,37 +10,68 @@ object Main {
       println()
     }
 
-    val test_list1 = "".toList
-    val test_list2 = "(if (zero? x) max (/ 1 x))".toList
-    val test_list3 = "I told him (that it's not (yet) done). (But he wasn't listening)".toList
-    println(balance(test_list1))
-    println(balance(test_list2))
-    println(balance(test_list3))
+    println(countChange(4, List(1, 2)))
   }
 
   /**
    * Exercise 1
    */
   def pascal(c: Int, r: Int): Int = {
-    if (c <= 0 || c == r) 1 else pascal(c, r - 1) + pascal(c - 1, r - 1)
+    // set value to 1 when on the edges
+    if (c <= 0 || c == r) {
+      1
+    } else {
+      // get value by summing the above row in the same column
+      // with the above row and one column to the left
+      pascal(c, r - 1) + pascal(c - 1, r - 1)
+    }
   }
 
   /**
    * Exercise 2
    */
   def balance(chars: List[Char]): Boolean = {
-    def isBalanced(): Boolean = {
-      val parens = chars.filter(Set('(', ')'))
-      if (parens.isEmpty == true) true
-      else (false)
+    def isBalanced(parens: List[Char], leftParens: Int, rightParens: Int): Boolean = {
+      if (parens.isEmpty) {
+        // when in the last iteration or a truly empty list
+        if (rightParens > leftParens) {
+          false
+        } else {
+          true
+        }
+      } else {
+        // return false if at any time there are too many right parens
+        if (rightParens > leftParens) false
+        else {
+          // call again w/ updated params
+          if (parens.head == '(') {
+            isBalanced(parens.tail, leftParens + 1, rightParens)
+          } else {
+            isBalanced(parens.tail, leftParens, rightParens + 1)
+          }
+        }
+      }
     }
 
-    if (chars.isEmpty == true) true
-    else (isBalanced())
+    // filter list to only have parens
+    isBalanced(chars.filter(Set('(', ')')), 0, 0)
   }
 
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+    def counter(money: Int, coins: List[Int]): Int = {
+      if (money == 0) 1
+      // with no money or an empty list, we can't make change
+      else if (money <= 0 || coins.isEmpty) 0
+      // with money and no list, we can't make change
+      else if (coins.isEmpty && money >= 1) 0
+      else {
+        counter(money, coins.tail) + counter(money - coins.head, coins)
+      }
+    }
+
+    counter(money, coins)
+  }
 }
