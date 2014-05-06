@@ -15,10 +15,10 @@ REMOTE_MYSQL_DEFAULTS_FILE_DEV="$LOCAL_PATH/.my.cnf-dev-reporting-api"
 
 # create base for osapi only
 echo -e "${TIMESTAMP}\nRunning mysqldump..."
-mysqldump --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME_PROD | gzip -9 > $LOCAL_FILE
+mysqldump --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME_PROD | gzip -9 | pv -pteraW -i1 > $LOCAL_FILE
 
 echo "Writing data to the destination database..."
-zcat $LOCAL_FILE | mysql --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_DEV $DB_NAME_DEV
+zcat $LOCAL_FILE | pv -pteraW -i1 | mysql --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_DEV $DB_NAME_DEV
 
 echo "Done."
 exit 0
