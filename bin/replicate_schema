@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+set -x
+
+TIMESTAMP=$(date +%Y_%m_%d_%H%M.%S)
+DB_NAME='osapi_v1'
+LOCAL_DB_NAME='platform_api_migrations_testing'
+LOCAL_PATH="$HOME/work/sandbox/mysql-dumps"
+LOCAL_FILE="$LOCAL_PATH/dumps/${DB_NAME}_database_${TIMESTAMP}.sql.gz"
+LOCAL_MYSQL_DEFAULTS_FILE_PROD="$LOCAL_PATH/.my.cnf-prod-os-api"
+LOCAL_MYSQL_DEFAULTS_FILE="$LOCAL_PATH/.my.cnf"
+
+# create base for osapi only
+echo -e "${TIMESTAMP}\nRunning mysqldump..."
+mysqldump --defaults-file=$LOCAL_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME | gzip -9 > $LOCAL_FILE
+
+echo "Writing data to the destination database..."
+zcat $LOCAL_FILE | mysql --defaults-file=$LOCAL_MYSQL_DEFAULTS_FILE $LOCAL_DB_NAME
+
+echo "Done."
+exit 0
