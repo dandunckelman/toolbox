@@ -3,19 +3,22 @@ set -e
 set -x
 
 TIMESTAMP=$(date +%Y_%m_%d_%H%M.%S)
-DB_NAME='osapi_v1'
-LOCAL_DB_NAME='platform_api_migrations_testing'
+
+DB_NAME_PROD='osapi_v1'
+DB_NAME_DEV='platform_api_migrations_testing'
+
 LOCAL_PATH="$HOME/work/sandbox/mysql-dumps"
-LOCAL_FILE="$LOCAL_PATH/dumps/${DB_NAME}_database_${TIMESTAMP}.sql.gz"
-LOCAL_MYSQL_DEFAULTS_FILE_PROD="$LOCAL_PATH/.my.cnf-prod-os-api"
-LOCAL_MYSQL_DEFAULTS_FILE="$LOCAL_PATH/.my.cnf"
+LOCAL_FILE="$LOCAL_PATH/dumps/${DB_NAME_PROD}_database_${TIMESTAMP}.sql.gz"
+
+REMOTE_MYSQL_DEFAULTS_FILE_PROD="$LOCAL_PATH/.my.cnf-prod-os-api"
+REMOTE_MYSQL_DEFAULTS_FILE_DEV="$LOCAL_PATH/.my.cnf-dev-reporting-api"
 
 # create base for osapi only
 echo -e "${TIMESTAMP}\nRunning mysqldump..."
-mysqldump --defaults-file=$LOCAL_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME | gzip -9 > $LOCAL_FILE
+mysqldump --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME_PROD | gzip -9 > $LOCAL_FILE
 
 echo "Writing data to the destination database..."
-zcat $LOCAL_FILE | mysql --defaults-file=$LOCAL_MYSQL_DEFAULTS_FILE $LOCAL_DB_NAME
+zcat $LOCAL_FILE | mysql --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_DEV $DB_NAME_DEV
 
 echo "Done."
 exit 0
