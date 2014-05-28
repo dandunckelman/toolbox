@@ -1,3 +1,22 @@
+# system aliases
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --exclude-dir=.git --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+alias ll='ls -ahlF'
+alias la='ls -A'
+alias l='ls -CF'
+alias log-out="gnome-session-quit"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 # project directories
 alias api='cd ~/work/api/'
 alias ar='cd ~/work/archive/'
@@ -18,6 +37,7 @@ alias odg='cd ~/work/gems/onescreen-deployer/'
 alias eg='cd ~/work/gems/onescreen-ember/'
 alias oeg='cd ~/work/gems/onescreen-external-api/'
 alias oig='cd ~/work/gems/onescreen-internal/'
+alias ayg='cd ~/work/gems/adaptive-yahoo/'
 alias pl='cd ~/work/player/'
 alias ogems='cd ~/work/gems/ruby-gems/'
 alias jt='cd ~/work/javascript-toolbox/'
@@ -38,6 +58,7 @@ alias umphone='sudo umount /media/nexus4/'
 # shortcuts
 alias install-vi-plugins='vim +PluginInstall +qall'
 alias ssh-jenkins='ssh-add ~/.ssh/os-m.pem; ssh ubuntu@ec2-107-22-46-156.compute-1.amazonaws.com'
+alias dircount='ls -l | grep ^d | wc -l'
 
 # deployment shortcuts
 alias odsl='od; onescreen-deployer -p sites -e production -a list'
