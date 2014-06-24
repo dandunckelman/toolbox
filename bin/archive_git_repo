@@ -1,0 +1,150 @@
+#!/bin/bash
+echo "What would you like to do:"
+echo "1. Archive a GitHub repository"
+echo "2. Add a cookbook to the cookbook archive"
+echo "3. Add gem to the gem archive"
+read CHOICE
+
+CHECKOUT_DIR="$HOME/tmp/github-archive/"
+ARCHIVE_DIR="$HOME/work/archive"
+cd $ARCHIVE_DIR
+
+stop() {
+  printf "\n$1\n"
+  exit 1
+}
+
+create_tmp_dirs() {
+  if [ -d "$CHECKOUT_DIR" ]; then
+    rm -rf $CHECKOUT_DIR
+  fi
+
+  mkdir -p $CHECKOUT_DIR;
+  cd $CHECKOUT_DIR;
+
+  # init a git repo
+  git init
+}
+
+if [ "$CHOICE" != 1 && "$CHOICE" != 2 && "$CHOICE" != 3 ]; then
+  stop "ERROR: Invalid input. Try again."
+else
+  echo "Type the name of a repo in question:"
+  read REPO
+
+  if [ "$REPO" == "" ]; then
+    stop "Please enter a repo's name. EXITING!"
+  fi
+fi
+
+if [ "$CHOICE" == 1 ]; then
+  printf "\nALERT! You're about to archive the repo, \"$REPO\", is this correct? (y/n)\n"
+  read CONFIRM
+
+  if [ "$CONFIRM" == "y" ]; then
+    BRANCH="master"
+    printf "\nDoes the \"$REPO\" repo use a branch name other than \"$BRANCH\"? (y/n)\n"
+    read BRANCH_CONFIRM
+
+    if [ "$BRANCH_CONFIRM" == "y" ]; then
+      printf "\nPlease enter the branch name:\n"
+      read BRANCH
+
+      if [ "$BRANCH" == "" ]; then
+        stop "ERROR: You did not enter a branch name. Exiting..."
+      fi
+    fi
+
+    printf "\nCreating local branch \"$REPO\" from remote repo...\n"
+    git fetch git@github.com:onescreen/$REPO.git $BRANCH:$REPO
+
+    printf "\nCheckout local branch \"$REPO\"...\n"
+    git checkout $REPO
+
+    printf "\nPushing local branch \"$REPO\" to the remote Archive repo...\n"
+    git push origin $REPO
+
+    printf "\nDone!\n"
+  else
+    stop
+  fi
+elif [ "$CHOICE" == 2 ]; then
+  printf "\nALERT: You're about to add \"$REPO's\" cookbook to the cookbook archive, is this correct? (y/n)\n"
+  read COOKBOOK_CONFIRM
+
+  if [ "$COOKBOOK_CONFIRM" == "y" ]; then
+    BRANCH="cookbook"
+    COOKBOOK_ARCHIVE_DIR="$ARCHIVE_DIR/$REPO"
+
+    # checkout the cookbooks branch so we can add this cookbook to the archive
+    git checkout cookbooks
+
+    # setup tmp dirs as needed
+    create_tmp_dirs
+
+    printf "\nFetching remote branch and checking it out locally...\n"
+    git fetch git@github.com:onescreen/$REPO.git $BRANCH:$REPO
+    git checkout $REPO
+
+    # remove the git dir so it isn't copied to the destination
+    rm -rf .git
+
+    printf "\nCopying the new local cookbook to the cookbooks archive\n"
+    mkdir -p $COOKBOOK_ARCHIVE_DIR
+    cp -r ./.* $COOKBOOK_ARCHIVE_DIR; cd $ARCHIVE_DIR
+    git add $REPO; git commit -m "Adding \"$REPO\" to the cookbooks archive."
+    git push origin cookbooks
+
+    printf "\nDeleting \"$REPO's\" cookbook branch...\n"
+    cd ~/work/$REPO; git checkout master; git push origin --delete $BRANCH
+
+    printf "\nDone!\n"
+  else
+    stop
+  fi
+elif [ "$CHOICE" == 3 ]; then
+  echo "Type the name of the Ruby gem in question:"
+  read GEM_NAME
+
+  printf "\nALERT: You're about to add the \"$GEM_NAME\" gem to the gem archive, from the \"$REPO\" repo, is this correct? (y/n)\n"
+  read GEM_CONFIRM
+
+  if [ "$GEM_CONFIRM" == "y" ]; then
+    GEM_ARCHIVE_DIR="$ARCHIVE_DIR/$GEM_NAME"
+
+    # checkout the gems branch so we can add this to the gems archive
+    git checkout gems
+
+    # setup tmp dirs as needed
+    create_tmp_dirs
+
+    printf "\nFetching remote branch and checking it out locally\n"
+    git fetch git@github.com:onescreen/$REPO.git $GEM_NAME:$GEM_NAME
+    git checkout $GEM_NAME
+
+    # remove the git dir so it isn't copied to the destination
+    rm -rf .git
+
+    printf "\nCopying the new local gem to the gems archive\n"
+    mkdir -p $GEM_ARCHIVE_DIR
+    cp -r ./.* $GEM_ARCHIVE_DIR; cd $ARCHIVE_DIR
+    git add $GEM_NAME; git commit -m "Adding \"$GEM_NAME\" to the gem archive."
+    git push origin gems
+
+    printf "\nDeleting the \"$GEM_NAME\" from the \"$REPO\" repo...\n"
+    if [ "$REPO" == "ruby-gems" ]; then
+      REPO_DIR="$HOME/work/gems/ruby-gems"
+    elif [ "$REPO" == "archive" ]; then
+      REPO_DIR="$ARCHIVE_DIR"
+    else
+      stop "You entered, \"$REPO\", which is an invalid git repo."
+    fi
+    cd $REPO_DIR; git checkout master; git push origin --delete $GEM_NAME
+
+    printf "\nDone!\n"
+  else
+    stop
+  fi
+else
+  stop "You typed an incorrect number. Derp"
+fi

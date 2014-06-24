@@ -19,6 +19,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # project directories
 alias api='cd ~/work/api/'
+alias apim='cd ~/work/api-master/'
 alias ar='cd ~/work/archive/'
 alias ch='cd ~/work/chef/'
 alias cr='cd ~/work/chef-recipes/'
@@ -56,9 +57,9 @@ alias mphone='sudo mtpfs -o allow_other /media/nexus4/'
 alias umphone='sudo umount /media/nexus4/'
 
 # shortcuts
-alias install-vi-plugins='vim +PluginInstall +qall'
-alias ssh-jenkins='ssh-add ~/.ssh/os-m.pem; ssh ubuntu@ec2-107-22-46-156.compute-1.amazonaws.com'
+alias ivp='vim +PluginInstall +qall'
 alias dircount='ls -l | grep ^d | wc -l'
+alias sbc='source ~/.bashrc'
 
 # deployment shortcuts
 alias odsl='od; onescreen-deployer -p sites -e production -a list'
@@ -67,3 +68,8 @@ alias odsu='od; onescreen-deployer -p sites -e production -a update'
 alias odal='od; onescreen-deployer -p api -e production -a list'
 alias odac='od; onescreen-deployer -p api -e production -a current'
 alias odau='od; onescreen-deployer -p api -e production -a update'
+
+# git shortcuts
+alias gs='git status'
+alias gd='git diff'
+alias gp='git pull'

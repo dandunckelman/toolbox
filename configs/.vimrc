@@ -11,6 +11,7 @@ Plugin 'jeroenbourgois/vim-actionscript'  " actionscript syntax highlighting
 Plugin 'derekwyatt/vim-scala'             " scala syntax highlighting and more
 Plugin 'Shougo/neocomplcache'             " autocompletion
 Plugin 'mileszs/ack.vim'                  " integrate ack into vim for 'silver searcher' integration
+Plugin 'kien/ctrlp.vim'                   " Full path fuzzy file, buffer, mru, tag, etc.
 
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
