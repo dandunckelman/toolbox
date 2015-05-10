@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# A simple script to initialize a new Go project's directories & git repo
+# It assumes that you want to setup the new project in the current directory
+#
+SYNTAX="golang-project-init PROJECT_NAME"
+GITHUB_USER="dandunckelman"
+PROJECT_NAME=$1
+PROJECT="github.com/$GITHUB_USER/$PROJECT_NAME"
+
+if [ "$PROJECT_NAME" == "" ]; then
+  echo "[`date`] [ERROR] Pass an argument that represents the project's name\n$SYNTAX"
+  exit 1
+fi
+
+echo "[`date`] [START] Initializing new Go project named, \"$PROJECT_NAME\""
+
+mkdir -p bin pkg src/$PROJECT
+cd src/$PROJECT
+git init
+
+echo "[`date`] [DONE] setup new Go project named, \"$PROJECT_NAME\""

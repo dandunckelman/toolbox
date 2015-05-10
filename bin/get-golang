@@ -7,6 +7,7 @@ FILENAME="go$VERSION-$ARCH-$OS.tar.gz"
 mkdir ~/tmp; cd ~/tmp
 curl -O "https://storage.googleapis.com/golang/$FILENAME"
 sudo tar -C /usr/local -xzf ~/tmp/$FILENAME
+rm ~/tmp/$FILENAME
 
 # add go to the path
 touch ~/.profile # to ensure the file exists
