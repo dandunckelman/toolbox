@@ -1,24 +1,30 @@
 #!/bin/sh
+#
+# A tool to help automate the process of dumping a schema from one server
+# and loading it onto another one
+#
 set -e
 set -x
 
+SYNTAX="replicate_schema SOURCE_SCHEMA DESTINATION_SCHEMA"
+if [ "$1" == "" || "$2" == "" ]; then
+  echo "[ERROR] SOURCE_SCHEMA or DESTINATION_SCHEMA is missing\n$SYNTAX"
+  exit 1
+fi
+
 TIMESTAMP=$(date +%Y_%m_%d_%H%M.%S)
-
-DB_NAME_PROD='osapi_v1'
-DB_NAME_DEV='platform_api_migrations_testing'
-
-LOCAL_PATH="$HOME/work/sandbox/mysql-dumps"
-LOCAL_FILE="$LOCAL_PATH/dumps/${DB_NAME_PROD}_database_${TIMESTAMP}.sql.gz"
-
-REMOTE_MYSQL_DEFAULTS_FILE_PROD="$LOCAL_PATH/.my.cnf-prod-os-api"
-REMOTE_MYSQL_DEFAULTS_FILE_DEV="$LOCAL_PATH/.my.cnf-dev-reporting-api"
+SOURCE_SCHEMA="$1"
+DESTINATION_SCHEMA="$2"
+MYSQL_DEFAULTS_FILE_SOURCE=".my.cnf-source"
+MYSQL_DEFAULTS_FILE_DESTINATION=".my.cnf-destination"
+LOCAL_FILE="${SOURCE_SCHEMA}_database_${TIMESTAMP}.sql.gz"
 
 # create base for osapi only
 echo -e "${TIMESTAMP}\nRunning mysqldump..."
-mysqldump --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_PROD -q --single-transaction $DB_NAME_PROD | gzip -9 | pv -pteraW -i1 > $LOCAL_FILE
+mysqldump --defaults-file=$MYSQL_DEFAULTS_FILE_SOURCE -q --single-transaction $SOURCE_SCHEMA | gzip -9 | pv -pteraW -i1 > $LOCAL_FILE
 
 echo "Writing data to the destination database..."
-zcat $LOCAL_FILE | pv -pteraW -i1 | mysql --defaults-file=$REMOTE_MYSQL_DEFAULTS_FILE_DEV $DB_NAME_DEV
+zcat $LOCAL_FILE | pv -pteraW -i1 | mysql --defaults-file=$MYSQL_DEFAULTS_FILE_DESTINATION $DESTINATION_SCHEMA
 
 echo "Done."
 exit 0
