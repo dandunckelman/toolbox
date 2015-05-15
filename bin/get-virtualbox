@@ -1,0 +1,9 @@
+#!/bin/bash
+FILENAME="virtualbox-4.3_4.3.28-100309~Ubuntu~raring_amd64.deb"
+echo "Installing other helpful package, \"dkms\"..."
+sudo apt-get install dkms
+mkdir ~/tmp
+cd tmp
+curl -L -o ~/tmp/$FILENAME "http://download.virtualbox.org/virtualbox/4.3.28/$FILENAME"
+sudo dpkg -i $FILENAME
+rm ~/tmp/$FILENAME

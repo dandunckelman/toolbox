@@ -1,0 +1,20 @@
+#!/bin/bash
+# NOTE:  if using vagrant, be sure to set a hostname so "facter fqdn" works
+# In the config block of the Vagrant file, add the following:
+#    config.vm.host_name = "vagrant.example.com"
+
+# install latest puppet
+sudo apt-get -y install ca-certificates
+PUPPET_DEB="puppetlabs-release-trusty.deb"
+wget https://apt.puppetlabs.com/$PUPPET_DEB
+sudo dpkg -i $PUPPET_DEB
+rm $PUPPET_DEB
+
+# install foreman
+echo "deb http://deb.theforeman.org/ trusty 1.8" | sudo tee /etc/apt/sources.list.d/foreman.list
+echo "deb http://deb.theforeman.org/ plugins 1.8" | sudo tee -a /etc/apt/sources.list.d/foreman.list
+wget -q http://deb.theforeman.org/pubkey.gpg -O- | sudo apt-key add -
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get -y install foreman-installer
+sudo foreman-installer

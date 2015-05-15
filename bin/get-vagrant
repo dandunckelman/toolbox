@@ -2,6 +2,6 @@
 FILENAME="vagrant_1.7.2_x86_64.deb"
 mkdir ~/tmp
 cd tmp
-curl -L -O "https://dl.bintray.com/mitchellh/vagrant/$FILENAME"
+curl -L -o $FILENAME "https://dl.bintray.com/mitchellh/vagrant/$FILENAME"
 sudo dpkg -i $FILENAME
 rm ~/tmp/$FILENAME
