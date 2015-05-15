@@ -1,7 +1,13 @@
 #!/bin/bash
-# NOTE:  if using vagrant, be sure to set a hostname so "facter fqdn" works
+# NOTE:  if using docker or vagrant, be sure to set a hostname so "facter fqdn" works
+#
+# VAGRANT
 # In the config block of the Vagrant file, add the following:
 #    config.vm.host_name = "vagrant.example.com"
+#
+# DOCKER
+# Set hostname from CLI when starting the run
+#    docker run --hostname="BLAHBLAH"
 
 # install latest puppet
 sudo apt-get -y install ca-certificates
