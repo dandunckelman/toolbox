@@ -1,0 +1,6 @@
+#!/bin/bash
+FILENAME="rundeck-launcher-2.5.0.jar"
+mkdir ~/rundeck
+cd ~/rundeck
+wget http://dl.bintray.com/rundeck/rundeck-maven/$FILENAME
+java -jar $FILENAME
