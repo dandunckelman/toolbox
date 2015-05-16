@@ -1,6 +1,12 @@
 #!/bin/bash
-FILENAME="rundeck-launcher-2.5.0.jar"
+FILENAME="rundeck-2.5.0-1-GA.deb"
 mkdir ~/rundeck
 cd ~/rundeck
-wget http://dl.bintray.com/rundeck/rundeck-maven/$FILENAME
-java -jar $FILENAME
+wget http://dl.bintray.com/rundeck/rundeck-deb/$FILENAME
+sudo dpkg -i $FILENAME
+rm $FILENAME
+
+# write upstart script
+sudo /etc/init.d/rundeckd start
+
+# Note: in some cases, we might need askpass to supply the root password
