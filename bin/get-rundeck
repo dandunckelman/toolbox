@@ -9,4 +9,36 @@ rm $FILENAME
 # write upstart script
 sudo /etc/init.d/rundeckd start
 
-# Note: in some cases, we might need askpass to supply the root password
+# NOTE: in some cases, we might need askpass to supply the root password
+
+# FOR SSL
+#   References:
+#     - http://rundeck.org/docs/administration/configuring-ssl.html
+#     - http://rundeck.org/docs/administration/configuration-file-reference.html#configuration-layout
+#
+keytool -keystore ssl/keystore -alias rundeck -genkey -keyalg RSA -keypass adminadmin -storepass adminadmin <<!
+hostname
+org unit name
+org name
+city
+state
+2-letter country code (US)
+yes
+!
+
+cp /etc/rundeck/ssl/keystore /etc/rundeck/ssl/truststore
+
+# Ensure /etc/rundeck/ssl/ssl.properties has the following content:
+# keystore=/etc/rundeck/ssl/keystore
+# keystore.password=adminadmin
+# key.password=adminadmin
+# truststore=/etc/rundeck/ssl/truststore
+# truststore.password=adminadmin
+
+# Modify /etc/rundeck/framework.properties to change URL/PORT properties to use HTTPS and port 4443
+#   - framework.server.url
+#   - framework.rundeck.url (this property wasn't present, so it should look just like server.url)
+#   - framework.server.port
+
+# Modify /etc/rundeck/rundeck-config.properties
+#  Change the value of grails.serverURL to have HTTPS and the 4443 port
