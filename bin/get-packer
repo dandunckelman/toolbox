@@ -1,0 +1,12 @@
+#!/bin/bash
+# get-packer
+#   quick tool to download and install packer on ubuntu (tested on v14.04)
+#
+FILENAME="packer_0.7.5_linux_amd64.zip"
+mkdir -p ~/tmp/packer
+cd tmp
+curl -L -o $FILENAME "https://dl.bintray.com/mitchellh/packer/$FILENAME"
+unzip $FILENAME -d packer
+rm $FILENAME
+sudo mv packer /usr/local/packer
+echo 'export PATH="$PATH:/usr/local/packer"' >> ~/.bashrc
