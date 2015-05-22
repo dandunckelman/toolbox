@@ -12,6 +12,7 @@ Plugin 'derekwyatt/vim-scala'             " scala syntax highlighting and more
 Plugin 'Shougo/neocomplcache'             " autocompletion
 Plugin 'mileszs/ack.vim'                  " integrate ack into vim for 'silver searcher' integration
 Plugin 'kien/ctrlp.vim'                   " Full path fuzzy file, buffer, mru, tag, etc.
+Plugin 'rodjek/vim-puppet'                " Puppet syntax highlighting
 
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
@@ -57,6 +58,11 @@ set tabpagemax=100  " when opening multiple tabs, allow max number of tabs
 " mouse
 set mouse-=a        " disable mouse
 set mousehide       " hide mouse after typing
+
+" Some plugins or settings (like relativenumbers or cursorline) need full redraws
+" of the screen or parts of the line. This will fix the issue by buffering screen
+" updates. But be aware that it won't be as smooth as gui macvim
+set lazyredraw
 
 " integrate ack.vim
 if executable('ag')
