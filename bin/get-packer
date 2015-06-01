@@ -10,3 +10,4 @@ unzip $FILENAME -d packer
 rm $FILENAME
 sudo mv packer /usr/local/packer
 echo 'export PATH="$PATH:/usr/local/packer"' >> ~/.bashrc
+source ~/.bashrc
