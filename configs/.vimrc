@@ -7,12 +7,10 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " my plugins
-Plugin 'jeroenbourgois/vim-actionscript'  " actionscript syntax highlighting
-Plugin 'derekwyatt/vim-scala'             " scala syntax highlighting and more
-Plugin 'Shougo/neocomplcache'             " autocompletion
-Plugin 'mileszs/ack.vim'                  " integrate ack into vim for 'silver searcher' integration
-Plugin 'kien/ctrlp.vim'                   " Full path fuzzy file, buffer, mru, tag, etc.
-Plugin 'rodjek/vim-puppet'                " Puppet syntax highlighting
+Plugin 'Shougo/neocomplcache'     " autocompletion
+Plugin 'kien/ctrlp.vim'           " Full path fuzzy file, buffer, mru, tag, etc.
+Plugin 'rodjek/vim-puppet'        " Puppet syntax highlighting
+Plugin 'vim-scripts/vim-vagrant'  " Vagrant integration
 
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
