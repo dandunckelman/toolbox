@@ -1,14 +1,4 @@
 #!/bin/bash
-# NOTE:  if using docker or vagrant, be sure to set a hostname so "facter fqdn" works
-#
-# VAGRANT
-# In the config block of the Vagrant file, add the following:
-#    config.vm.host_name = "vagrant.example.com"
-#
-# DOCKER
-# Set hostname from CLI when starting the run
-#    docker run --hostname="BLAHBLAH"
-
 # install latest puppet
 sudo apt-get -y install ca-certificates
 PUPPET_DEB="puppetlabs-release-trusty.deb"
@@ -23,4 +13,7 @@ wget -q http://deb.theforeman.org/pubkey.gpg -O- | sudo apt-key add -
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get -y install foreman-installer
+
+# change umask to 0022 before installing (per documentation on foreman site)
+umask 0022
 sudo foreman-installer
