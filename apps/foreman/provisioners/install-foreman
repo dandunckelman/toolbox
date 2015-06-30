@@ -1,0 +1,13 @@
+#!/bin/bash
+echo ""
+echo "============== [START] RUN FOREMAN-INSTALLER =============="
+echo ""
+
+umask 0022 # per documentation on foreman site
+sudo foreman-installer --puppet-server-dynamic-environments true \
+  --puppet-server-environments [] \
+  --puppet-server-git-repo true
+
+echo ""
+echo "============== [DONE]  RUN FOREMAN-INSTALLER =============="
+echo ""
