@@ -1,16 +1,6 @@
 [
     {
-        "forwarded_ports": [
-            {
-                "guest" : 80,
-                "host" : 8080
-            },
-            {
-                "guest" : 443,
-                "host" : 8443
-            }
-        ],
-        "hostname" : "test-foreman-01.ta.local",
+        "hostname" : "test-foreman-01.example.com",
         "private_network" : "192.168.200.10",
         "provisioners": [
             {
@@ -27,21 +17,29 @@
         }
     },
     {
-        "hostname" : "dev-agent-01.ta.local",
+        "hostname" : "dev-agent-01.example.com",
         "private_network" : "192.168.200.100",
         "provisioners": [
             {
                 "file" : "install-puppet",
                 "type" : "shell"
+            },
+            {
+                "file" : "setup-puppet-agent",
+                "type" : "shell"
             }
         ]
     },
     {
-        "hostname" : "prod-agent-01.ta.local",
+        "hostname" : "prod-agent-01.example.com",
         "private_network" : "192.168.200.101",
         "provisioners": [
             {
                 "file" : "install-puppet",
+                "type" : "shell"
+            },
+            {
+                "file" : "setup-puppet-agent",
                 "type" : "shell"
             }
         ]

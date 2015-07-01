@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "" | sudo tee --append /etc/hosts 2> /dev/null
+echo "192.168.200.10 test-foreman-01.example.com test-foreman-01" | sudo tee --append /etc/hosts 2> /dev/null
+
+sudo cp /vagrant/templates/puppet.conf /etc/puppet/puppet.conf
+
+sudo service puppet stop
+sudo service puppet start
+
+sudo puppet resource service puppet ensure=running enable=true
+sudo puppet agent --enable

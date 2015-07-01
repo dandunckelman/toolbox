@@ -10,7 +10,7 @@ else
   sudo apt-get -y install ca-certificates
 
   # It's critical that we use "pc1"; otherwise, we install Puppet v4.x, which
-  # currently isn't compatible with foreman-installer v1.8
+  # currently isn't compatible with foreman-installer v1.8.x
   PUPPET_DEB="puppetlabs-release-pc1-trusty.deb"
   wget https://apt.puppetlabs.com/$PUPPET_DEB
   sudo dpkg -i $PUPPET_DEB
