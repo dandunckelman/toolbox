@@ -1,0 +1,22 @@
+#!/bin/bash
+if ps aux | grep "puppet agent" | grep -v grep 2> /dev/null
+then
+  echo "================= PUPPET AGENT ALREADY INSTALLED =============="
+else
+  echo ""
+  echo "============== [START] INSTALL LATEST PUPPET =============="
+  echo ""
+
+  sudo apt-get -y install ca-certificates
+
+  # It's critical that we use "pc1"; otherwise, we install Puppet v4.x, which
+  # currently isn't compatible with foreman-installer v1.8
+  PUPPET_DEB="puppetlabs-release-pc1-trusty.deb"
+  wget https://apt.puppetlabs.com/$PUPPET_DEB
+  sudo dpkg -i $PUPPET_DEB
+  rm $PUPPET_DEB
+
+  echo ""
+  echo "============== [DONE]  INSTALL LATEST PUPPET =============="
+  echo ""
+fi
