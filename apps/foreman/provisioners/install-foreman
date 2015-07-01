@@ -25,7 +25,7 @@ else
   umask 0022 # per documentation on foreman site
   sudo foreman-installer --puppet-server-dynamic-environments true \
     --puppet-server-environments [] \
-    --puppet-server-git-repo true
+    --puppet-server-git-repo true \
     --foreman-admin-password "testing-admin"
 
   echo ""
