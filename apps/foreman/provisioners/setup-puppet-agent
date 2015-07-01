@@ -1,6 +1,11 @@
 #!/bin/bash
-echo "" | sudo tee --append /etc/hosts 2> /dev/null
-echo "192.168.200.10 test-foreman-01.example.com test-foreman-01" | sudo tee --append /etc/hosts 2> /dev/null
+if grep "test-foreman-01" /etc/hosts
+then
+  echo "This machine's /etc/hosts file is already setup"
+else
+  echo "" | sudo tee --append /etc/hosts 2> /dev/null
+  echo "192.168.200.10 test-foreman-01.example.com test-foreman-01" | sudo tee --append /etc/hosts 2> /dev/null
+fi
 
 sudo cp /vagrant/templates/puppet.conf /etc/puppet/puppet.conf
 
