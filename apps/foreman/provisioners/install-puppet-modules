@@ -3,10 +3,6 @@
 sudo cp /vagrant/templates/hiera.yaml /etc/
 sudo ln -s /etc/hiera.yaml /etc/puppet/hiera.yaml
 
-# module needed to provide GitHub authentication, which is necessary to allow
-# r10k to sync GitHub repos
-sudo puppet module install sharpie/deploy_keys
-
 # setup r10k - tool for puppet environment management
 sudo puppet module install zack/r10k
 sudo puppet apply /vagrant/manifests/configure_r10k.pp
