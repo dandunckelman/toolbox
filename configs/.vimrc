@@ -14,9 +14,7 @@ Plugin 'vim-scripts/vim-vagrant'  " Vagrant integration
 
 call vundle#end()
 
-filetype plugin indent on " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on " required
 "
 " Brief help
 " :PluginList          - list configured plugins
