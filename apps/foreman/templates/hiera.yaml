@@ -3,7 +3,7 @@
   - yaml
 :hierarchy:
   - "nodes/%{::fqdn}"
-  - "environment/%{::environment}"
+  - "%{environment}"
   - common
 :logger: "console"
 :yaml:
