@@ -7,5 +7,8 @@ sudo ln -s /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo puppet module install zack/r10k
 sudo puppet apply /vagrant/manifests/configure_r10k.pp
 
+# install needed modules
+sudo puppet module install puppetlabs-vcsrepo
+
 # syncronize environments
 sudo r10k deploy environment -pv
