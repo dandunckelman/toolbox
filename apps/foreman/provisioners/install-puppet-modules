@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 # setup hiera
 sudo cp /vagrant/templates/hiera.yaml /etc/
 sudo ln -s /etc/hiera.yaml /etc/puppet/hiera.yaml
@@ -7,8 +9,14 @@ sudo ln -s /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo puppet module install zack/r10k
 sudo puppet apply /vagrant/manifests/configure_r10k.pp
 
-# install needed modules
-sudo puppet module install puppetlabs-vcsrepo
+# setup github integration
+eval "$(ssh-agent -s)"
+ssh-keygen -t rsa -b 4096 -C "dldunckel@gmail.com" -f puppet-repo -P ""
+sudo mv puppet-repo puppet-repo.pub /root/.ssh/
+ssh-add /root/.ssh/puppet-repo
+echo "========= Public key for GitHub integration =========="
+cat /root/.ssh/puppet-repo.pub
+echo "========= Public key for GitHub integration =========="
 
 # syncronize environments
 sudo r10k deploy environment -pv

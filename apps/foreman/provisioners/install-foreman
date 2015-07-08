@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 if ps aux | grep /usr/share/foreman | grep -v grep 2> /dev/null
 then
   echo "================= FOREMAN ALREADY INSTALLED =============="
@@ -27,6 +29,8 @@ else
     --puppet-server-environments [] \
     --puppet-server-git-repo true \
     --foreman-admin-password "testing-admin"
+
+  sudo puppet cert clean --all
 
   echo ""
   echo "============== [DONE]  RUN FOREMAN-INSTALLER =============="

@@ -1,6 +1,6 @@
 [
     {
-        "hostname" : "test-foreman-01.example.com",
+        "hostname" : "fp-01.local",
         "private_network" : "192.168.200.10",
         "provisioners": [
             {
@@ -10,6 +10,10 @@
             {
                 "file" : "install-foreman",
                 "type" : "shell"
+            },
+            {
+                "file" : "install-puppet-modules",
+                "type" : "shell"
             }
         ],
         "vm" : {
@@ -17,7 +21,7 @@
         }
     },
     {
-        "hostname" : "dev-agent-01.example.com",
+        "hostname" : "dev-agent-01.local",
         "private_network" : "192.168.200.100",
         "provisioners": [
             {
@@ -31,7 +35,7 @@
         ]
     },
     {
-        "hostname" : "prod-agent-01.example.com",
+        "hostname" : "prod-agent-01.local",
         "private_network" : "192.168.200.101",
         "provisioners": [
             {
