@@ -30,8 +30,6 @@ else
     --puppet-server-git-repo true \
     --foreman-admin-password "testing-admin"
 
-  sudo puppet cert clean --all
-
   echo ""
   echo "============== [DONE]  RUN FOREMAN-INSTALLER =============="
   echo ""
