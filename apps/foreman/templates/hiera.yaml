@@ -7,4 +7,4 @@
   - common
 :logger: "console"
 :yaml:
-  :datadir: /etc/puppet/environments/%{environment}/hiera
+  :datadir: "/etc/puppet/hiera/%{environment}"

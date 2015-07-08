@@ -12,7 +12,8 @@ sudo puppet apply /vagrant/manifests/configure_r10k.pp
 # setup github integration
 eval "$(ssh-agent -s)"
 ssh-keygen -t rsa -b 4096 -C "dldunckel@gmail.com" -f puppet-repo -P ""
-sudo mv puppet-repo puppet-repo.pub /root/.ssh/
+ssh-keygen -t rsa -b 4096 -C "dldunckel@gmail.com" -f hiera-repo -P ""
+sudo mv puppet-repo puppet-repo.pub hiera-repo hiera-repo.pub /root/.ssh/
 ssh-add /root/.ssh/puppet-repo
 echo "========= Public key for GitHub integration =========="
 cat /root/.ssh/puppet-repo.pub

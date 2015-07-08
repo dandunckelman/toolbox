@@ -1,4 +1,13 @@
 class { "r10k":
-  remote  => "ssh://git@github.com/dandunckelman/puppet.git",
-  version => "1.5.1",
+  sources => {
+    "puppet" => {
+      "remote" => "ssh://git@github.com/dandunckelman/puppet.git",
+      "basedir" => "${::settings::confdir}/environments",
+    },
+    "hiera" => {
+      "remote" => "ssh://git@github.com/dandunckelman/hiera.git",
+      "basedir" => "${::settings::confdir}/hiera",
+    },
+  },
+  version => "2.0.2",
 }
