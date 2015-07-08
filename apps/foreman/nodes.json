@@ -21,7 +21,7 @@
         }
     },
     {
-        "hostname" : "dev-agent-01.local",
+        "hostname" : "dev-01.local",
         "private_network" : "192.168.200.100",
         "provisioners": [
             {
@@ -35,7 +35,7 @@
         ]
     },
     {
-        "hostname" : "prod-agent-01.local",
+        "hostname" : "prod-01.local",
         "private_network" : "192.168.200.101",
         "provisioners": [
             {
