@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+node_config = (JSON.parse(File.read("node.json")))
+
+Vagrant.configure(2) do |config|
+  config.vm.box = node_config['box']
+  config.vm.box_check_update = node_config['box_check_update']
+  config.vm.define node_config['hostname'] do |c|
+    c.vm.hostname = node_config['hostname']
+
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    c.vm.network "private_network", ip: node_config['private_ip']
+
+    c.vm.provider "virtualbox" do |vb|
+      vb.memory = node_config['virtualbox']['memory']
+    end
+
+    # Enable provisioning with a shell script. Additional provisioners such as
+    # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+    # documentation for more information about their specific syntax and use.
+    node_config['provisioners'].each do |prov|
+      c.vm.provision prov['type'].to_sym,
+        path: "provisioners/#{prov['file']}",
+        privileged: false
+    end
+  end
+end

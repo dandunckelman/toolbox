@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+WWW_DIR="/var/www"
+APP="uploading"
+
+source ~/.rvm/scripts/rvm
+sudo mkdir -p $WWW_DIR
+sudo cp -r /vagrant/$APP/ $WWW_DIR/
+sudo chown -R vagrant:vagrant $WWW_DIR
+cd $WWW_DIR/$APP
+cp /vagrant/configs/.gemrc ~/
+gem install bundler
+bundle install
