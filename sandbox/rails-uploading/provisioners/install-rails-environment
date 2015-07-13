@@ -7,3 +7,4 @@ cd $APP_DIR
 cp /vagrant/configs/.gemrc ~/
 gem install bundler
 bundle install
+rails s -d -b 0.0.0.0

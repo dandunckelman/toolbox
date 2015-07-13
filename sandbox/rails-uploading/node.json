@@ -2,15 +2,16 @@
   "box" : "ubuntu/trusty64",
   "box_check_update" : true,
   "hostname" : "uploading.example.com",
-  "private_ip" : "192.168.200.200",
   "provisioners" : [
     {
       "type" : "shell",
-      "file" : "install-rvm-ruby"
+      "file" : "install-rvm-ruby",
+      "privileged" : false
     },
     {
       "type" : "shell",
-      "file" : "install-rails-environment"
+      "file" : "install-rails-environment",
+      "privileged" : false
     }
   ],
   "virtualbox" : {
