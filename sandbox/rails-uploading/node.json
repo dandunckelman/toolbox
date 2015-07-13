@@ -1,8 +1,8 @@
 {
   "box" : "ubuntu/trusty64",
   "box_check_update" : true,
-  "hostname" : "rails-uploading.local",
-  "private_ip" : "192.168.33.10",
+  "hostname" : "uploading.example.com",
+  "private_ip" : "192.168.200.200",
   "provisioners" : [
     {
       "type" : "shell",
@@ -14,6 +14,6 @@
     }
   ],
   "virtualbox" : {
-    "memory" : "2048"
+    "memory" : 2048
   }
 }
