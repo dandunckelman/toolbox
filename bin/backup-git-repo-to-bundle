@@ -1,0 +1,29 @@
+#!/bin/bash
+# Backup the repositories indicated in the command line
+# Almost all taken from:  https://gist.github.com/icoloma/2af0aaa087d918f15fe9
+#
+# Example:
+# backup-git-repo-to-bundle user1/repo1 user1/repo2
+#
+set -e
+
+for i in $@; do
+  FILENAME=$(echo $i | sed 's/\//-/g')
+
+  printf "===== Cloning $i to $FILENAME/.git\n"
+  mkdir -p $FILENAME
+  git clone --mirror git@github.com:$i $FILENAME/.git
+  cd $FILENAME
+  git config --bool core.bare false
+  git reset -q HEAD .
+  git checkout -q .
+
+  printf "\n===== Creating $FILENAME.bundle\n"
+  git bundle create ../$FILENAME.bundle --all
+
+  printf "\n===== Removing $FILENAME\n"
+  cd ..
+  rm -rf $FILENAME
+
+  printf "===== Repository saved as $FILENAME.bundle\n"
+done

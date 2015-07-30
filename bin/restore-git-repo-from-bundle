@@ -1,0 +1,12 @@
+#!/bin/bash
+# Restore the repository indicated in the command line
+# Almost all taken from:  https://gist.github.com/icoloma/2af0aaa087d918f15fe9
+#
+# Example:
+# restore-git-repo-from-bundle filename.bundle
+#
+set -e
+
+FOLDER_NAME=$(echo $1 | sed 's/.bundle//')
+printf "========== Restoring $1\n"
+git clone $1 $FOLDER_NAME
