@@ -27,7 +27,9 @@ Vagrant.configure(2) do |config|
 
       if node['provisioners']
         node['provisioners'].each do |provisioner|
-          node_config.vm.provision provisioner['type'].to_sym, path: "provisioners/#{provisioner['file']}"
+          node_config.vm.provision provisioner['type'].to_sym,
+            path: "provisioners/#{provisioner['file']}",
+            privileged: provisioner['privileged']
         end
       end
     end
