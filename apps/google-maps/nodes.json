@@ -1,22 +1,19 @@
 [
     {
         "hostname" : "gmap-poc.local",
-        "forwarded_ports" : [
-          {
-            "guest" : 3000,
-            "host"  : 3000
-          }
-        ],
+        "private_network" : "192.168.100.10",
         "provisioners": [
           {
-            "type" : "shell",
             "file" : "install-rvm-ruby",
-            "privileged" : false
+            "name" : "Install RVM/Ruby",
+            "privileged" : false,
+            "type" : "shell"
           },
           {
-            "type" : "shell",
             "file" : "install-rails-environment",
-            "privileged" : false
+            "name" : "Install Rails Environment",
+            "privileged" : false,
+            "type" : "shell"
           }
         ],
         "vm" : {
