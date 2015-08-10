@@ -1,9 +1,26 @@
 #!/bin/bash
 set -e
 
+# install mysql client/server to resolve the dependency for the mysql2 ruby gem
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libmysqlclient-dev mysql-server-5.6
+
+APP_DIR="/vagrant/rails-app"
 source ~/.rvm/scripts/rvm
-cd /vagrant/rails-app
+cd $APP_DIR
 cp /vagrant/configs/.gemrc ~/
 gem install bundler
 bundle install
-#rails s -d -b 0.0.0.0
+
+# on new project init, create rails app skeleton
+if [ ! -f "$APP_DIR/bin/rails" ]; then
+  rails new .
+fi
+
+echo "DB MIGRATE"
+rake db:migrate
+
+echo "DB SETUP"
+rake db:setup
+
+echo "Starting new Rails server"
+rails s -d
