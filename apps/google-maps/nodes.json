@@ -7,7 +7,18 @@
             "host"  => 80
           }
         ],
-        "provisioners": [],
+        "provisioners": [
+          {
+            "type" : "shell",
+            "file" : "install-rvm-ruby",
+            "privileged" : false
+          },
+          {
+            "type" : "shell",
+            "file" : "install-rails-environment",
+            "privileged" : false
+          }
+        ],
         "vm" : {
             "memory": 2048
         }
