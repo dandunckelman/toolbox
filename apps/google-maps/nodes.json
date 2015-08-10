@@ -1,0 +1,15 @@
+[
+    {
+        "hostname" : "gm-poc.local",
+        "forwarded_ports" : [
+          {
+            "guest" => 3000,
+            "host"  => 80
+          }
+        ],
+        "provisioners": [],
+        "vm" : {
+            "memory": 2048
+        }
+    }
+]

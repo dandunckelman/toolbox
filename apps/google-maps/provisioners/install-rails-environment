@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+source ~/.rvm/scripts/rvm
+cd /vagrant/rails-app
+cp /vagrant/configs/.gemrc ~/
+gem install bundler
+bundle install
+#rails s -d -b 0.0.0.0
