@@ -38,5 +38,6 @@ alias gs='git status'
 # vagrant shortcuts
 alias vh='vagrant halt'
 alias vp='vagrant provision'
+alias vsh='vagrant ssh'
 alias vs='vagrant status'
 alias vu='vagrant up'
