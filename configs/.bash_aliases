@@ -73,3 +73,9 @@ alias odau='od; onescreen-deployer -p api -e production -a update'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git pull'
+
+# vagrant shortcuts
+alias vp='vagrant provision'
+alias vu='vagrant up'
+alias vs='vagrant status'
+alias vh='vagrant halt'
