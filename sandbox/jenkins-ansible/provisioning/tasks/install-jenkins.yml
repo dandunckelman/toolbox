@@ -1,0 +1,16 @@
+---
+# Taken from here:
+#   https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
+- name: Setup Jenkins apt-key
+  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
+
+- name: Setup Jenkins apt-repo
+  # this module requires python-apt
+  #   Does that mean the ansible module, apt package or something else?
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=present
+
+- name: install jenkins
+  apt: name=jenkins update_cache=yes
+
+- name: Start Jenkins service
+  service: name=jenkins state=started

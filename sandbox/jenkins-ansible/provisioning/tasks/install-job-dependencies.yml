@@ -1,0 +1,16 @@
+---
+- name: install libbz2-dev
+  apt: name=libbz2-dev
+
+- name: install libpcre3-dev
+  apt: name=libpcre3-dev
+
+- name: install zlib1g-dev
+  apt: name=zlib1g-dev
+
+- name: give jenkins sudo access when running jobs
+  lineinfile: 
+    dest: /etc/sudoers
+    backup: yes
+    line: "%jenkins ALL=NOPASSWD: ALL"
+    state: present

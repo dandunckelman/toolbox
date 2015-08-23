@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+hostname = "jenkins-ansible.test.com"
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.box_check_update = true
+
+  config.vm.define hostname do |c|
+    c.vm.hostname = hostname
+    c.vm.network "private_network", ip: "192.168.100.100"
+
+    c.vm.provider "virtualbox" do |virtualbox_config|
+      virtualbox_config.cpus = 1
+      virtualbox_config.memory = 1024
+    end
+
+    c.vm.provision :ansible do |ansible|
+      ansible.playbook = "provisioning/playbook.yml"
+      ansible.verbose = "vvv" # 3x the fun?
+    end
+  end
+end
