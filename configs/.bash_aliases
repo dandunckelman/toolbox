@@ -8,9 +8,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -ahlF'
-alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -ahlF'
 alias log-out="gnome-session-quit"
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -18,64 +16,27 @@ alias log-out="gnome-session-quit"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # project directories
-alias api='cd ~/work/api/'
-alias apim='cd ~/work/api-master/'
-alias ar='cd ~/work/archive/'
-alias ch='cd ~/work/chef/'
-alias cr='cd ~/work/chef-recipes/'
-alias con='cd ~/work/conduit/'
-alias oc='cd ~/work/console/'
-alias cb='cd ~/work/cookbooks/'
-alias dash='cd ~/work/dashboard/'
-alias dc='cd ~/work/documentor/'
-alias em='cd ~/work/emailer/'
-alias ember='cd ~/work/ember/rtb_analytics/rails/'
-alias eb='cd ~/work/ember-bridge/'
-alias ebc='cd ~/work/ember-bridge-cookbook/'
-alias ebm='cd ~/work/ember-bridge-migrator/'
-alias og='cd ~/work/gems/onescreen/'
-alias odg='cd ~/work/gems/onescreen-deployer/'
-alias eg='cd ~/work/gems/onescreen-ember/'
-alias oeg='cd ~/work/gems/onescreen-external-api/'
-alias oig='cd ~/work/gems/onescreen-internal/'
-alias ayg='cd ~/work/gems/adaptive-yahoo/'
-alias pl='cd ~/work/player/'
-alias ogems='cd ~/work/gems/ruby-gems/'
-alias jt='cd ~/work/javascript-toolbox/'
-alias od='cd ~/work/onescreen-deployer/'
-alias pr='cd ~/work/processor/'
-alias sb='cd ~/work/sandbox/'
-alias sc='cd ~/work/sandbox/scala/'
-alias si='cd ~/work/sites/'
 alias tb='cd ~/work/toolbox/'
 
 # remaps
 alias ifconfig='/sbin/ifconfig'
 
-# hardware
-alias mphone='sudo mtpfs -o allow_other /media/nexus4/'
-alias umphone='sudo umount /media/nexus4/'
-
 # shortcuts
 alias ivp='vim +PluginInstall +qall'
 alias dircount='ls -l | grep ^d | wc -l'
 alias sbc='source ~/.bashrc'
-
-# deployment shortcuts
-alias odsl='od; onescreen-deployer -p sites -e production -a list'
-alias odsc='od; onescreen-deployer -p sites -e production -a current'
-alias odsu='od; onescreen-deployer -p sites -e production -a update'
-alias odal='od; onescreen-deployer -p api -e production -a list'
-alias odac='od; onescreen-deployer -p api -e production -a current'
-alias odau='od; onescreen-deployer -p api -e production -a update'
+alias v='vi -p'
 
 # git shortcuts
-alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
 alias gd='git diff'
+alias gl='git log'
 alias gp='git pull'
+alias gs='git status'
 
 # vagrant shortcuts
-alias vp='vagrant provision'
-alias vu='vagrant up'
-alias vs='vagrant status'
 alias vh='vagrant halt'
+alias vp='vagrant provision'
+alias vs='vagrant status'
+alias vu='vagrant up'
