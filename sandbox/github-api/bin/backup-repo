@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-require 'github_api'
-require 'pry'
-
-github = Github.new
-binding.pry
