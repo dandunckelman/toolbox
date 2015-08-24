@@ -31,9 +31,11 @@ alias aguu='sudo apt-get update; sudo apt-get -y upgrade'
 # git shortcuts
 alias ga='git add'
 alias gc='git commit'
+alias gco='git checkout'
 alias gd='git diff'
 alias gl='git log'
 alias gp='git pull'
+alias gpu='git push'
 alias gs='git status'
 
 # vagrant shortcuts
