@@ -1,5 +1,8 @@
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -24,7 +27,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -77,21 +80,21 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  fi
 fi
 
-PATH="$PATH":"$HOME"/.rvm/bin # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
-# flex SDK
-export PATH=/opt/flex/bin:$PATH
-export ANT_HOME=/usr/bin/ant
-export ANT_OPTIONS="-XX:MaxPermSize=900m -Xmx900m"
-export PATH=$PATH:$ANT_HOME/bin
+# add local bin to path
+export PATH="$PATH:/home/dunk/bin"
 
-# android sdk
-export PATH=$HOME/apps/android-sdk/sdk/tools:$PATH
-export PATH=$HOME/apps/android-sdk/sdk/platform-tools:$PATH
+# add packer to path
+export PATH="$PATH:/usr/local/packer"

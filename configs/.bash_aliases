@@ -26,6 +26,7 @@ alias ivp='vim +PluginInstall +qall'
 alias dircount='ls -l | grep ^d | wc -l'
 alias sbc='source ~/.bashrc'
 alias v='vi -p'
+alias aguu='sudo apt-get update; sudo apt-get -y upgrade'
 
 # git shortcuts
 alias ga='git add'

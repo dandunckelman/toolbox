@@ -3,3 +3,7 @@
 [user]                                                                          
   name = Dan Dunckel                                                            
 	email = dldunckel@gmail.com
+[push]
+  default = matching
+[core]
+  editor = vim

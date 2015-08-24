@@ -1,10 +1,11 @@
 set nocompatible " be iMproved, required
 filetype off " required
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " my plugins
 Plugin 'Shougo/neocomplcache'     " autocompletion
@@ -15,6 +16,8 @@ Plugin 'vim-scripts/vim-vagrant'  " Vagrant integration
 call vundle#end()
 
 filetype plugin on " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
 " Brief help
 " :PluginList          - list configured plugins
@@ -56,13 +59,3 @@ set tabpagemax=100  " when opening multiple tabs, allow max number of tabs
 " mouse
 set mouse-=a        " disable mouse
 set mousehide       " hide mouse after typing
-
-" Some plugins or settings (like relativenumbers or cursorline) need full redraws
-" of the screen or parts of the line. This will fix the issue by buffering screen
-" updates. But be aware that it won't be as smooth as gui macvim
-set lazyredraw
-
-" integrate ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
