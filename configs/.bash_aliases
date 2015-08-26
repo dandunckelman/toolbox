@@ -39,6 +39,7 @@ alias gp='git pull'
 alias gpo='git pull origin'
 alias gpu='git push'
 alias gpuo='git push origin'
+alias gr='git rebase'
 alias gs='git status'
 alias gst='git stash'
 
