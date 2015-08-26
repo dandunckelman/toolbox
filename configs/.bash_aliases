@@ -34,9 +34,13 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
 alias gl='git log'
+alias gm='git merge'
 alias gp='git pull'
+alias gpo='git pull origin'
 alias gpu='git push'
+alias gpuo='git push origin'
 alias gs='git status'
+alias gst='git stash'
 
 # vagrant shortcuts
 alias vh='vagrant halt'
