@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810095704) do
+ActiveRecord::Schema.define(version: 20150908084533) do
 
   create_table "churches", force: :cascade do |t|
-    t.string   "name",                     limit: 255
+    t.string   "name",                     limit: 255,   default: "CHURCH NAME"
     t.string   "denomination",             limit: 255
     t.string   "primary_address_1",        limit: 255
     t.string   "primary_address_2",        limit: 255
