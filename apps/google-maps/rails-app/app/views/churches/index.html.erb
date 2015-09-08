@@ -1,0 +1,21 @@
+<h1>Churches</h1>
+<!-- TODO: show selected churches as selections are maded -->
+<%= form_tag(action: "get_directions") do %>
+<table cellpadding=2 border=1>
+    <tr>
+        <th>Checkpoint</th>
+    <% @table_headings.each do |th| %>
+        <th><%= th %></th>
+    <% end %>
+    </tr>
+    <% @churches.each do |church| %>
+    <tr>
+      <td style="text-align: center;"><input type="checkbox" value="0" /></td>
+      <% @table_headings.each do |th| %>
+      <td><%= church[th] %></td>
+      <% end %>
+    </tr>
+    <% end %>
+</table>
+<input type="submit" value="Get Directions"/>
+<% end %>
