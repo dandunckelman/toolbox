@@ -16,11 +16,11 @@ if [ ! -f "$APP_DIR/bin/rails" ]; then
   rails new .
 fi
 
-echo "DB MIGRATE"
-rake db:migrate
-
 echo "DB SETUP"
 rake db:setup
+
+echo "DB MIGRATE"
+rake db:migrate
 
 echo "Starting new Rails server"
 rails s -d

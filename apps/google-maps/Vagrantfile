@@ -1,37 +1,19 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
-nodes_config = (JSON.parse(File.read("nodes.json")))
+hostname = "gmap-poc.local"
 
 Vagrant.configure(2) do |config|
+  config.vm.hostname = hostname
   config.vm.box = "ubuntu/trusty64"
   config.vm.box_check_update = true
+  config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
 
-  nodes_config.each do |node|
-    config.vm.define node['hostname'] do |node_config|
-      node_config.vm.hostname = node['hostname']
-
-      if node['forwarded_ports']
-        node['forwarded_ports'].each do |port|
-          node_config.vm.network "forwarded_port", guest: port['guest'], host: port['host']
-        end
-      end
-
-      node_config.vm.network "private_network", ip: node['private_network'] if node['private_network']
-
-      if node['vm']
-        node_config.vm.provider "virtualbox" do |vb|
-          vb.memory = node['vm']['memory'] if node['vm']['memory']
-        end
-      end
-
-      if node['provisioners']
-        node['provisioners'].each do |provisioner|
-          node_config.vm.provision provisioner['type'].to_sym,
-            path: "provisioners/#{provisioner['file']}",
-            privileged: provisioner['privileged']
-        end
-      end
+  config.vm.define hostname do |c|
+    c.vm.provider :virtualbox do |vb|
+      vb.memory = 1024
     end
+
+    c.vm.provision :shell, path: "provisioners/install-rvm-ruby"
+    c.vm.provision :shell, path: "provisioners/install-rails-environment"
   end
 end
