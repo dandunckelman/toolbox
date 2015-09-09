@@ -6,8 +6,8 @@ class ChurchesController < ApplicationController
     # - enable pagination
     @table_headings = [
       'name',
+      'rank',
       'primary_address_1',
-      'primary_address_2',
       'primary_address_city',
       'primary_address_state',
       'primary_address_zip'
