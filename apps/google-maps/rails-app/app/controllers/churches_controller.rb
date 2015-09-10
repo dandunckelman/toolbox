@@ -17,7 +17,11 @@ class ChurchesController < ApplicationController
   end
 
   def get_directions
-    # TODO take in params of multiple locations and make API request to GMAPS
+    # TODO take in the user's current location (or ask for a starting point)
+    starting_point = nil
+    selected_churches = Church.find params[:selected_churches_ids]
+
+    ChurchesHelper.get_directions_from_google(starting_point, selected_churches)
   end
 
   private

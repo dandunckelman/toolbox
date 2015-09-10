@@ -1,0 +1,6 @@
+    <tr id="church_<%= church.id %>">
+        <td style="text-align: center;"><input type="checkbox" value=0 /></td>
+        <% @table_headings.each do |th| %>
+        <td><%= church[th] %></td>
+        <% end %>
+    </tr>

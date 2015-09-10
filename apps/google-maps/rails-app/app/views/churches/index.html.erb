@@ -8,14 +8,7 @@
         <th><%= th.capitalize %></th>
         <% end %>
     </tr>
-    <% @churches.each do |church| %>
-    <tr>
-        <td style="text-align: center;"><%= check_box_tag("selections[]") %></td>
-        <% @table_headings.each do |th| %>
-        <td><%= church[th] %></td>
-        <% end %>
-    </tr>
-    <% end %>
+    <%= render @churches %>
 </table>
-<input type="submit" value="Get Directions"/>
+<%= submit_tag("Get Directions") %>
 <% end %>
