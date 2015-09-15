@@ -13,21 +13,17 @@ class ChurchesController < ApplicationController
       'primary_address_zip'
     ]
 
-    @churches = Church.limit(10).order(:name)
+    @churches = Church.limit(25).order('rank desc')
   end
 
-  def get_directions
-    # TODO take in the user's current location (or ask for a starting point)
-    origin = "8641 Orange Ave. Orange, CA 92865"
+  def directions
+    # TODO request user's location or ask for a starting point
+    origin = "Moreno Valley, CA"
 
     @request_data = {
-      :avoid        => "tolls",
       :destination  => origin, # origin/destination are the same,
-                               # since we want to return to where we started
-      :key          => ENV['GOOGLE_MAPS_API_TOKEN'],
-      #:mode         => "driving",
-      :origin       => origin,
-      :waypoints    => get_waypoints(Church.find(params[:selected_churches_ids]))
+      :origin       => origin, # since we want to return to where we started
+      :waypoints    => get_waypoints(Church.find(params[:selected_churches_ids].split(',')))
     }
   end
 
