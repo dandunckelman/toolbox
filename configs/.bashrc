@@ -98,3 +98,6 @@ export PATH="$PATH:/home/dunk/bin"
 
 # add packer to path
 export PATH="$PATH:/usr/local/packer"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
