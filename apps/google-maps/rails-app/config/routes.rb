@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
+  root 'churches#index'
   resources :churches
 
-  post "churches/get_directions", to: "churches#get_directions"
+  post "churches/directions", to: "churches#directions"
 end

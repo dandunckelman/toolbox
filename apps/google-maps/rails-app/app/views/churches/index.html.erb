@@ -1,6 +1,6 @@
 <h1>Churches</h1>
 <!-- TODO: show selected churches as selections are maded -->
-<%= form_tag(action: "get_directions") do %>
+<%= form_tag(action: "directions") do %>
 <table cellpadding=2 border=1>
     <tr>
         <th>Selection</th>
@@ -10,5 +10,5 @@
     </tr>
     <%= render @churches %>
 </table>
-<%= submit_tag("Get Directions") %>
+<%= submit_tag("Get Directions", :id => 'get_directions_submit') %>
 <% end %>

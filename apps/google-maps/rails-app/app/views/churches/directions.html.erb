@@ -1,0 +1,65 @@
+<div id="directions-summary-wrapper">
+    <h1>Directions</h1>
+    <div id="directions-panel"></div>
+</div>
+<div id="map-wrapper">
+    <h1>Map</h1>
+    <div id="map"></div>
+</div>
+<div style="clear:both;"></div>
+<script>
+function initMap() {
+  var origin = "<%= @request_data[:origin] %>",
+    destination = "<%= @request_data[:destination] %>",
+    geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode( { 'address': origin}, function(results, status) {
+    if (status != google.maps.GeocoderStatus.OK) {
+      alert("Geocode was not successful for the following reason: " + status);
+    } else {
+      console.log(results);
+      var latitude = results[0]['geometry']['location']['G'],
+        longitude = results[0]['geometry']['location']['K'];
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: latitude, lng: longitude },
+        scrollwheel: true,
+        zoom: 9
+      });
+
+      var directionsDisplay = new google.maps.DirectionsRenderer({ map: map });
+      var directionsService = new google.maps.DirectionsService;
+
+      directionsService.route({
+        destination: destination,
+        optimizeWaypoints: true,
+        origin: origin,
+        travelMode: google.maps.TravelMode.DRIVING,
+        waypoints: [
+          <% @request_data[:waypoints].each do |wp| %>
+          <%= raw "{ location: \"#{wp}\" }," %>
+          <% end %>
+        ]
+      }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          var route = response.routes[0];
+          var summaryPanel = document.getElementById('directions-panel');
+          summaryPanel.innerHTML = '';
+
+          // For each route, display summary information.
+          for (var i = 0; i < route.legs.length; i++) {
+            summaryPanel.innerHTML += '<div class="segment">' +
+                                          '<p class="heading">Segment: ' + (i + 1) + ' - ' + route.legs[i].distance.text + '</p>' +
+                                          '<p class="directions">' + route.legs[i].start_address + ' to ' + route.legs[i].end_address + '</p>' +
+                                      '</div>';
+          }
+        } else {
+          alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
