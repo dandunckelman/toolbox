@@ -1,8 +1,7 @@
 #!/bin/bash
-VERSION="1.4.2.darwin"
+VERSION="1.5.1.linux"
 ARCH="amd64"
-OS="osx10.8"
-FILENAME="go$VERSION-$ARCH-$OS.tar.gz"
+FILENAME="go$VERSION-$ARCH.tar.gz"
 
 mkdir ~/tmp; cd ~/tmp
 curl -O "https://storage.googleapis.com/golang/$FILENAME"
@@ -10,5 +9,4 @@ sudo tar -C /usr/local -xzf ~/tmp/$FILENAME
 rm ~/tmp/$FILENAME
 
 # add go to the path
-touch ~/.profile # to ensure the file exists
-echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc

@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "[INFO] STOPPING NGINX:"
+sudo service nginx stop
+
+echo "[INFO] STOPPING MEMCACHED:"
+sudo service memcached stop
+
+echo "[INFO] STOPPING CUPS:"
+sudo service cups stop
+
+echo "[INFO] STOPPING REDIS-SERVER:"
+sudo service redis-server stop
+
+echo "[INFO] STOPPING POSTGRESQL:"
+sudo service postgresql stop
+
+echo "[INFO] STOPPING DOCKER:"
+sudo service docker stop
+
+echo "[INFO] STOPPING NACLIENT:"
+sudo service naclient stop

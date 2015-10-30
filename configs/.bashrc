@@ -101,3 +101,8 @@ export PATH="$PATH:/usr/local/packer"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+GO_WORKSPACE=/home/dunk/work/tools/go
+export GOPATH=$GO_WORKSPACE
+export PATH="$PATH:$GO_WORKSPACE/bin"
+export PATH="$PATH:/usr/local/go/bin"

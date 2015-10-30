@@ -4,6 +4,6 @@
   name = Dan Dunckel                                                            
 	email = dldunckel@gmail.com
 [push]
-  default = matching
+  default = simple
 [core]
   editor = vim
