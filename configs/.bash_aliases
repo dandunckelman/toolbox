@@ -43,6 +43,8 @@ alias grs='git reset'
 alias grv='git revert'
 alias gs='git status'
 alias gst='git stash'
+alias mtqa='gco qa; gpo qa; gm --no-edit development; gpuo qa'
+alias mtp='gco production; gpo production; gm --no-edit qa; gpuo production; gco development'
 
 # vagrant shortcuts
 alias vd='vagrant destroy'
@@ -51,3 +53,7 @@ alias vp='vagrant provision'
 alias vsh='vagrant ssh'
 alias vs='vagrant status'
 alias vu='vagrant up'
+
+# development shortcuts
+alias rsp='rake spec_prep'
+alias rss='rake spec_standalone'
