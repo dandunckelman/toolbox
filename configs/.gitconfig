@@ -2,7 +2,7 @@
   ui = true                                                                     
 [user]                                                                          
   name = Dan Dunckel                                                            
-	email = dldunckel@gmail.com
+  email = dldunckel@gmail.com
 [push]
   default = simple
 [core]
