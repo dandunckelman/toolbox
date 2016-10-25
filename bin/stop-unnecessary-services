@@ -1,10 +1,4 @@
 #!/bin/bash
-echo "[INFO] STOPPING NGINX:"
-sudo service nginx stop
-
-echo "[INFO] STOPPING MEMCACHED:"
-sudo service memcached stop
-
 echo "[INFO] STOPPING CUPS:"
 sudo service cups stop
 sudo service cups-browsed stop
@@ -17,9 +11,6 @@ sudo service postgresql stop
 
 echo "[INFO] STOPPING DOCKER:"
 sudo service docker stop
-
-echo "[INFO] STOPPING NACLIENT:"
-sudo service naclient stop
 
 echo "[INFO] STOPPING MYSQL:"
 sudo service mysql stop

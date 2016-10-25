@@ -21,11 +21,13 @@ alias sbc='source ~/.bashrc'
 alias v='vi -p'
 alias aguu='sudo apt-get update; sudo apt-get -y upgrade'
 alias l='ls -ahlF'
+alias xmr='xmonad --replace'
 
 # git shortcuts
 alias ga='git add'
 alias gb='git branch'
 alias gc='git commit'
+alias gcl='git clone'
 alias gconf='git config'
 alias gco='git checkout'
 alias gd='git diff'
@@ -45,6 +47,7 @@ alias gs='git status'
 alias gst='git stash'
 alias mtqa='gco qa; gpo qa; gm --no-edit development; gpuo qa'
 alias mtp='gco production; gpo production; gm --no-edit qa; gpuo production; gco development'
+alias mtpin='gco pin_nodejs_module_for_vcd_cell; gpo pin_nodejs_module_for_vcd_cell; gm --no-edit development; gpuo pin_nodejs_module_for_vcd_cell; gco development'
 
 # vagrant shortcuts
 alias vd='vagrant destroy'
@@ -53,6 +56,7 @@ alias vp='vagrant provision'
 alias vsh='vagrant ssh'
 alias vs='vagrant status'
 alias vu='vagrant up'
+alias vup='vagrant up --provision'
 
 # development shortcuts
 alias rsp='rake spec_prep'
