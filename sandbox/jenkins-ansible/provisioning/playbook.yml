@@ -1,9 +1,0 @@
----
-- hosts: all
-  sudo: true
-  tasks:
-    - include: tasks/install-jenkins.yml
-    - include: tasks/install-job-dependencies.yml
-    - include: tasks/create-job.yml
-  vars_files:
-    - vars/jenkins.yml
