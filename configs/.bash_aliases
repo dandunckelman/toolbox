@@ -61,3 +61,16 @@ alias vup='vagrant up --provision'
 # development shortcuts
 alias rsp='rake spec_prep'
 alias rss='rake spec_standalone'
+
+alias oops='sudo !!'
+alias ax="chmod a+x"
+alias listen='netstat -l | grep "LISTEN "'
+alias see-history="history | awk '{print $2}' | sort | uniq -c | sort -nr | head"
+alias tgz='tar -zxvf'
+alias findorphans='find / -nouser -ls'
+alias recently-changed="find . -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | head -5"
+alias findbig='find /home -size +1000000b -ls'
+alias functions='set | grep "()"'
+alias up1='cd ..'
+alias up2='cd ../..'
+alias up3='cd ../../..'
