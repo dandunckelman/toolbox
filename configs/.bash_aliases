@@ -59,8 +59,9 @@ alias vu='vagrant up'
 alias vup='vagrant up --provision'
 
 # development shortcuts
-alias rsp='rake spec_prep'
-alias rss='rake spec_standalone'
+alias rsp='bundle exec rake spec_prep'
+alias rss='bundle exec rake spec_standalone'
+alias rsa='bundle exec rake rspec:acceptance'
 
 alias oops='sudo !!'
 alias ax="chmod a+x"
