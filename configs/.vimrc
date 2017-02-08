@@ -42,19 +42,18 @@ set expandtab
 set softtabstop=2
 
 " view configuration
-set hlsearch        " highlight matching searches
-set number          " show line numbers in the left column
-set incsearch       " start searching after first character of search is made
-                    " refine search with more characters
-set smartcase       " when searching, respect case of the search
-set ignorecase      " ignore case when searching
-set colorcolumn=80  " show a red bar at the 80th column
-set ruler           " show numbers representing current row/column of file
-set showmatch       " show matching brackets
-set matchtime=5     " bracket blinking? what is this?
-set showcmd         " show the current command in the status bar
-set autoread        " set to auto read when a file is changed from the outside
-set tabpagemax=100  " when opening multiple tabs, allow max number of tabs
+set hlsearch       " highlight matching searches
+set number         " show line numbers in the left column
+set incsearch      " start searching after first character of search is made
+                   " refine search with more characters
+set smartcase      " when searching, respect case of the search
+set ignorecase     " ignore case when searching
+set ruler          " show numbers representing current row/column of file
+set showmatch      " show matching brackets
+set matchtime=5    " bracket blinking? what is this?
+set showcmd        " show the current command in the status bar
+set autoread       " set to auto read when a file is changed from the outside
+set tabpagemax=100 " when opening multiple tabs, allow max number of tabs
 
 " mouse
 set mouse-=a        " disable mouse
