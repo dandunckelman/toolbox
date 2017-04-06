@@ -8,8 +8,18 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# project directories
-alias tb='cd ~/work/personal/toolbox/'
+alias wrk='cd ~/work'
+
+# personal project directories
+alias wrkp='cd ~/work/personal'
+alias ptb='cd ~/work/personal/toolbox'
+
+# work project directories
+alias wrkt='cd ~/work/ta'
+alias tas='cd ~/work/ta/scripts'
+alias tatap='cd ~/work/ta/ta/puppet'
+alias tatah='cd ~/work/ta/ta/hiera'
+alias tad='cd ~/work/ta/dan.techaccelerator.com'
 
 # remaps
 alias ifconfig='/sbin/ifconfig'
