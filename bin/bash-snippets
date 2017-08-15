@@ -1,0 +1,125 @@
+#!/bin/bash
+############################################################
+##### expanding a gzipped archive in another directory #####
+############################################################
+tar -xzf {{DIR}}/FILE.tar.gz -C {{DIR}}
+
+######################################
+##### creating a gzipped archive #####
+######################################
+tar -czf FILENAME.tar.gz -C /DIR/HAVING/FILES FILE1 FILE2
+
+###########################################
+##### simple year-month-day structure #####
+###########################################
+date +"%Y-%m-%d"
+
+#########################
+##### do basic math #####
+#########################
+let "ADDITION = 1 + 1" # 2
+let "MULTI = 1 * 5"    # 5
+let "SUBTRACT = 5 - 1" # 4
+let "DIVIDE = 4 / 2"   # 2
+
+################
+##### curl #####
+################
+
+##### get cookie #####
+curl -c cookie.txt -XPOST {{SOME_URL}}
+
+##### send cookie #####
+curl -b cookie.txt {{SOME_URL}}
+
+##############################
+##### Upload file to FTP #####
+##############################
+curl -s -o /dev/null -T $FILE_PATH ftp://$DOMAIN --user $USER:$PASS
+
+######################################
+##### Capitalize first character #####
+######################################
+STR="capitalized"
+echo "This is ${STR^}" # This is Capitalized
+
+#####################################
+##### Lowercase first character #####
+#####################################
+STR="Lowercased"
+echo ${STR,,}
+
+##########################################
+##### Remove empty lines from output #####
+##########################################
+## This also illustrates how to store a heredoc to a variable
+read -r -d '' VAR <<'EOF'
+abc'asdf"
+
+$(dont-execute-this)
+
+foo"bar"''
+EOF
+
+## NOTE: variable must be quoted, otherwise...newlines are lost
+echo "$VAR" | awk 'NF'
+
+#######################
+##### count lines #####
+#######################
+echo "$VAR" | wc -l # 6
+
+#################################################
+##### Replace multiple spaces with just one #####
+#################################################
+df -h | tr -s '[:space:]'
+
+##################################################
+##### Get Nth column of space-delimited data #####
+##################################################
+echo "first second third fourth fifth" | cut -d ' ' -f 5 # fifth
+
+#########################
+##### Clean apt-get #####
+#########################
+apt-get -y clean
+apt-get -y autoclean
+apt-get -y autoremove
+
+################
+##### Hash #####
+################
+
+##### Create Hash #####
+declare -A HASH_TABLE=(
+  ["object_title_01"]="object_01_value"
+  ["object_title_02"]="object_02_value"
+)
+
+##### Iterate over the hash
+for HASH_OBJECT in "${!HASH_TABLE[@]}"; do
+  echo "KEY: $HASH_OBJECT" # object_title_01
+  echo "VALUE: ${HASH_TABLE['$HASH_OBJECT']}" # object_01_value
+done
+
+##### Create empty hash #####
+declare -A EMPTY_HASH
+
+##### Add element to empty hash #####
+EMPTY_HASH=(["key"]="value")
+
+###########################
+##### Shuffle numbers #####
+###########################
+shuf --input-range=0-9
+
+###############################################
+##### Toggle an HAProxy backend's servers #####
+###############################################
+echo "enable server BACKEND_NAME/SERVER_HOSTNAME" | socat /var/run/haproxy/admin.sock stdio
+
+#######################################
+##### Sed-like string replacement #####
+#######################################
+STR_WITH_HYPENS="some-thing-here"
+echo "${STR_WITH_HYPENS//-/_}" # some_thing_here
