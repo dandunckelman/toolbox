@@ -4,6 +4,5 @@
 * Bootstrapping
 * Git
 * Ruby
-* Scala
 * Vim
 * Xmonad
