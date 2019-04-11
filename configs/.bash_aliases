@@ -17,12 +17,14 @@ alias ptb='cd ~/work/personal/toolbox'
 # work project directories
 alias wrkt='cd ~/work/ta'
 alias tas='cd ~/work/ta/scripts'
+alias tatab='cd ~/work/ta/ta/backend'
+alias tatapo='cd ~/work/ta/ta/portal'
 alias tatap='cd ~/work/ta/ta/puppet'
 alias tatah='cd ~/work/ta/ta/hiera'
 alias tad='cd ~/work/ta/dan.techaccelerator.com'
 
 # remaps
-alias ifconfig='/sbin/ifconfig'
+#alias ifconfig='/sbin/ifconfig'
 
 # shortcuts
 alias ivp='vim +PluginInstall +qall'
@@ -89,3 +91,7 @@ alias ping-pub='ping google.com'
 alias ping-modem='ping 192.168.100.1'
 alias ping-router='ping 192.168.1.1'
 alias ping-switch='ping 192.168.1.2'
+
+# Default to human readable figures
+alias df='df -h'
+alias du='du -h'

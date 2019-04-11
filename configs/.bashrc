@@ -87,22 +87,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-
-# add local bin to path
-export PATH="$PATH:/home/dunk/bin"
-
-# add packer to path
-export PATH="$PATH:/usr/local/packer"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-GO_WORKSPACE=/home/dunk/work/tools/go
-export GOPATH=$GO_WORKSPACE
-export PATH="$PATH:$GO_WORKSPACE/bin"
-export PATH="$PATH:/usr/local/go/bin"
+export DOCKER_HOST=tcp://0.0.0.0:2375
